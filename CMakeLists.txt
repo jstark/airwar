@@ -23,7 +23,9 @@ set(GAME ${PROJECT_NAME})
 set(HEADERS 
 	entity.hxx
 	aircraft.hxx
-	scene.hxx)
+	scene.hxx
+	resource_holder.hxx
+	texture_holder.hxx)
 set(SOURCES
 	entity.cxx
 	aircraft.cxx

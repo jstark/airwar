@@ -2,6 +2,7 @@
 #define AIRWAR_AIRCRAFT_HXX_INCLUDED
 
 #include "entity.hxx"
+#include "texture_holder.hxx"
 #include "SFML/Graphics.hpp"
 
 namespace airwar
@@ -15,7 +16,7 @@ namespace airwar
 	class Aircraft : public Entity
 	{
 	public:
-		explicit Aircraft(AircraftType type);
+		explicit Aircraft(AircraftType type, const TextureHolder &textures);
 
 		// sf::Drawable interface
 		void draw_current(sf::RenderTarget &target, sf::RenderStates states) const;
