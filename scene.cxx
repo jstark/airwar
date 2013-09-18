@@ -42,3 +42,22 @@ void SceneNode::draw_current(sf::RenderTarget &target, sf::RenderStates states) 
 {
 	// override to add functionality
 }
+
+void SceneNode::update(sf::Time dt)
+{
+	update_current(dt);
+	update_children(dt);
+}
+
+void SceneNode::update_current(sf::Time dt)
+{
+	// override to add functionality
+}
+
+void SceneNode::update_children(sf::Time dt)
+{
+	for (auto& node : children_)
+	{
+		node->update(dt);
+	}
+}

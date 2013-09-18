@@ -17,3 +17,9 @@ sf::Vector2f Entity::velocity() const
 {
 	return velocity_;
 }
+
+void Entity::update_current(sf::Time dt)
+{
+	/* move is a Transformable method */
+	this->move(velocity_ * dt.asSeconds());
+}

@@ -18,12 +18,17 @@ namespace airwar
 		void attach(Ptr node);
 		Ptr detach(const SceneNode& node);
 
+		void update(sf::Time dt);
+
 	private:
 		// drawable interface
 		void draw(sf::RenderTarget &target, sf::RenderStates states) const final;
 
 		// helper function, draws only the current object
 		void draw_current(sf::RenderTarget &target, sf::RenderStates states) const;
+
+		virtual void update_current(sf::Time dt);
+		void update_children(sf::Time dt);
 
 		std::vector<Ptr> children_;
 		SceneNode *parent_ = nullptr;
