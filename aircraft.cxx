@@ -23,7 +23,11 @@ namespace
 }
 
 Aircraft::Aircraft(AircraftType type, const TextureHolder& textures)
-: type_(type), sprite_(textures.get(to_texture_id(type))) {}
+: type_(type), sprite_(textures.get(to_texture_id(type))) 
+{
+	sf::FloatRect bounds = sprite_.getLocalBounds();
+	sprite_.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
+}
 
 void Aircraft::draw_current(sf::RenderTarget &target, sf::RenderStates states) const
 {
