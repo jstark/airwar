@@ -20,6 +20,9 @@ namespace airwar
 
 		void update(sf::Time dt);
 
+		sf::Transform get_world_transform() const;
+		sf::Vector2f get_world_position() const;
+
 	private:
 		// drawable interface
 		void draw(sf::RenderTarget &target, sf::RenderStates states) const final;

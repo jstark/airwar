@@ -61,3 +61,19 @@ void SceneNode::update_children(sf::Time dt)
 		node->update(dt);
 	}
 }
+
+sf::Transform SceneNode::get_world_transform() const
+{
+	sf::Transform tranform = sf::Transform::Identity;
+	for (const SceneNode *node = this;
+		node != nullptr; node = node->parent_)
+	{
+		tranform = node->getTransform() * tranform;
+	}
+	return tranform;
+}
+
+sf::Vector2f SceneNode::get_world_position() const
+{
+	return get_world_transform() * sf::Vector2f();
+}
