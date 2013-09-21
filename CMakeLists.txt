@@ -35,8 +35,48 @@ set(SOURCES
 	world.cxx
 	game.cxx
 	airwar.cpp)
-add_executable(${GAME} ${HEADERS} ${SOURCES})
-target_link_libraries(${GAME} ${SFML_LIBRARIES})
+
+if (${CMAKE_SYSTEM_NAME} MATCHES Windows)
+	add_executable(${GAME} WIN32 ${HEADERS} ${SOURCES})
+endif()
+
+if (${CMAKE_SYSTEM_NAME} MATCHES Windows)
+	set(MAIN_LINK_LIBRARY
+		optimized ${SFML_ROOT}/lib/sfml-main.lib
+		debug ${SFML_ROOT}/lib/sfml-main-d.lib)
+	target_link_libraries(${GAME} ${SFML_LIBRARIES} ${MAIN_LINK_LIBRARY})
+endif()
 
 # installation
-# TODO
+if(${CMAKE_SYSTEM_NAME} MATCHES Windows)
+	install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
+endif()
+
+# c++ runtime
+include(InstallRequiredSystemLibraries)
+
+if (${CMAKE_SYSTEM_NAME} MATCHES Windows)
+	install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/Media DESTINATION bin)
+	install(FILES
+		${SFML_ROOT}/bin/openal32.dll
+		${SFML_ROOT}/bin/libsndfile-1.dll
+		${SFML_ROOT}/bin/sfml-network-2.dll
+		${SFML_ROOT}/bin/sfml-audio-2.dll
+		${SFML_ROOT}/bin/sfml-graphics-2.dll
+		${SFML_ROOT}/bin/sfml-window-2.dll
+		${SFML_ROOT}/bin/sfml-system-2.dll
+		DESTINATION bin
+		CONFIGURATIONS Release;RelWithDebInfo;MinSizeRel)
+
+	install(FILES
+		${SFML_ROOT}/bin/openal32.dll
+		${SFML_ROOT}/bin/libsndfile-1.dll
+		${SFML_ROOT}/bin/sfml-network-d-2.dll
+		${SFML_ROOT}/bin/sfml-audio-d-2.dll
+		${SFML_ROOT}/bin/sfml-graphics-d-2.dll
+		${SFML_ROOT}/bin/sfml-window-d-2.dll
+		${SFML_ROOT}/bin/sfml-system-d-2.dll
+		DESTINATION bin
+		CONFIGURATIONS Debug)
+endif()
+
