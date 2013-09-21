@@ -2,8 +2,8 @@
 #define AIRWAR_GAME_HXX_INCLUDED
 
 #include "world.hxx"
-#include "SFML/System/Time.hpp"
-
+#include "SFML/System.hpp"
+#include "SFML/Window.hpp"
 #include "SFML/Graphics.hpp"
 
 namespace airwar
@@ -15,11 +15,17 @@ namespace airwar
 		void run();
 	private:
 		void process_events();
-		void update(sf::Time elapsedTime);
+		void update(sf::Time elapsed_time);
 		void render();
+		void update_statistics(sf::Time elapsed_time);
 
 		sf::RenderWindow window;
 		World world;
+
+		sf::Font font;
+		sf::Text statistics_text;
+		sf::Time statistics_update_time;
+		std::size_t statistics_num_frames{ 0 };
 	};
 }
 
