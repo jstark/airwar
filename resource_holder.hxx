@@ -53,7 +53,9 @@ namespace airwar
 	template<typename Resource, typename Identifier>
 	Resource& ResourceHolder<Resource, Identifier>::get(Identifier id)
 	{
-		return static_cast<const ResourceHolder<Resource, Identifier>*>(this)->get(id);
+		auto found = resources_.find(id);
+		assert(found != resources_.end());
+		return *(found->second);
 	}
 
 	template<typename Resource, typename Identifier>
