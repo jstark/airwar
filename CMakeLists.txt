@@ -25,11 +25,15 @@ set(HEADERS
 	aircraft.hxx
 	scene.hxx
 	resource_holder.hxx
-	texture_holder.hxx)
+	texture_holder.hxx
+	world.hxx
+	game.hxx)
 set(SOURCES
 	entity.cxx
 	aircraft.cxx
 	scene.cxx
+	world.cxx
+	game.cxx
 	airwar.cpp)
 add_executable(${GAME} ${HEADERS} ${SOURCES})
 target_link_libraries(${GAME} ${SFML_LIBRARIES})
