@@ -13,7 +13,8 @@ namespace airwar
 		enum class ID
 		{
 			Eagle,
-			Raptor
+			Raptor,
+			Desert
 		};
 	}
 
