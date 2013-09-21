@@ -28,13 +28,24 @@ namespace airwar
 		void draw(sf::RenderTarget &target, sf::RenderStates states) const final;
 
 		// helper function, draws only the current object
-		void draw_current(sf::RenderTarget &target, sf::RenderStates states) const;
+		virtual void draw_current(sf::RenderTarget &target, sf::RenderStates states) const;
 
 		virtual void update_current(sf::Time dt);
 		void update_children(sf::Time dt);
 
 		std::vector<Ptr> children_;
 		SceneNode *parent_ = nullptr;
+	};
+
+	class SpriteNode : public SceneNode
+	{
+	public:
+		explicit SpriteNode(const sf::Texture& texture);
+		SpriteNode(const sf::Texture& texture, const sf::IntRect& rect);
+
+	private:
+		void draw_current(sf::RenderTarget &target, sf::RenderStates states) const override;
+		sf::Sprite sprite_;
 	};
 }
 

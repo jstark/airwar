@@ -4,7 +4,7 @@
 #include <cassert>
 
 using airwar::SceneNode;
-using airwar::SceneNode;
+using airwar::SpriteNode;
 
 void SceneNode::attach(SceneNode::Ptr node)
 {
@@ -76,4 +76,15 @@ sf::Transform SceneNode::get_world_transform() const
 sf::Vector2f SceneNode::get_world_position() const
 {
 	return get_world_transform() * sf::Vector2f();
+}
+
+SpriteNode::SpriteNode(const sf::Texture &texture)
+: sprite_(texture) {}
+
+SpriteNode::SpriteNode(const sf::Texture &texture, const sf::IntRect &rect)
+: sprite_(texture, rect) {}
+
+void SpriteNode::draw_current(sf::RenderTarget &target, sf::RenderStates states) const
+{
+	target.draw(sprite_, states);
 }
