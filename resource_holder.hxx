@@ -33,7 +33,8 @@ namespace airwar
 		{
 			throw std::runtime_error("ResourceHolder::load - Failed to load " + filename);
 		}
-		auto inserted = resources_.insert({ id, std::move(resource) });
+        auto inserted = resources_.insert(
+                std::make_pair(id, std::move(resource)));
 		assert(inserted.second);
 	}
 
@@ -68,3 +69,4 @@ namespace airwar
 }
 
 #endif // AIRWAR_RESOURCE_HOLDER_HXX_INCLUDED
+

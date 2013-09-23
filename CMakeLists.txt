@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 2.8)
 if(CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
     # use libc++ in Mac OS X
     if(${CMAKE_SYSTEM_NAME} MATCHES Darwin)
@@ -38,6 +38,8 @@ set(SOURCES
 
 if (${CMAKE_SYSTEM_NAME} MATCHES Windows)
 	add_executable(${GAME} WIN32 ${HEADERS} ${SOURCES})
+elseif(${CMAKE_SYSTEM_NAME} MATCHES Darwin)
+    add_executable(${GAME} MACOSX_BUNDLE ${HEADERS} ${SOURCES})
 endif()
 
 if (${CMAKE_SYSTEM_NAME} MATCHES Windows)
@@ -45,6 +47,8 @@ if (${CMAKE_SYSTEM_NAME} MATCHES Windows)
 		optimized ${SFML_ROOT}/lib/sfml-main.lib
 		debug ${SFML_ROOT}/lib/sfml-main-d.lib)
 	target_link_libraries(${GAME} ${SFML_LIBRARIES} ${MAIN_LINK_LIBRARY})
+elseif(${CMAKE_SYSTEM_NAME} MATCHES Darwin)
+    target_link_libraries(${GAME} ${SFML_LIBRARIES})
 endif()
 
 # installation
