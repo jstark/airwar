@@ -40,6 +40,8 @@ if (${CMAKE_SYSTEM_NAME} MATCHES Windows)
 	add_executable(${GAME} WIN32 ${HEADERS} ${SOURCES})
 elseif(${CMAKE_SYSTEM_NAME} MATCHES Darwin)
     add_executable(${GAME} MACOSX_BUNDLE ${HEADERS} ${SOURCES})
+else()
+    add_executable(${GAME} ${HEADERS} ${SOURCES})
 endif()
 
 if (${CMAKE_SYSTEM_NAME} MATCHES Windows)
@@ -47,7 +49,7 @@ if (${CMAKE_SYSTEM_NAME} MATCHES Windows)
 		optimized ${SFML_ROOT}/lib/sfml-main.lib
 		debug ${SFML_ROOT}/lib/sfml-main-d.lib)
 	target_link_libraries(${GAME} ${SFML_LIBRARIES} ${MAIN_LINK_LIBRARY})
-elseif(${CMAKE_SYSTEM_NAME} MATCHES Darwin)
+else()
     target_link_libraries(${GAME} ${SFML_LIBRARIES})
 endif()
 
