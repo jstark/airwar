@@ -28,7 +28,7 @@ void Game::run()
 		{
 			time_since_last_update -= TimePerFrame;
 			process_events();
-			update(TimePerFrame);
+			if (!is_paused) update(TimePerFrame);
 		}
 		update_statistics(elapsed_time);
 		render();
@@ -49,6 +49,11 @@ void Game::process_events()
 		case sf::Event::Closed:
 			window.close();
 			break;
+		case sf::Event::GainedFocus:
+			is_paused = false;
+			break;
+		case sf::Event::LostFocus:
+			is_paused = true;
 		default:
 			break;
 		}

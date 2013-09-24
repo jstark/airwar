@@ -26,6 +26,8 @@ namespace airwar
 		sf::Text statistics_text;
 		sf::Time statistics_update_time;
 		std::size_t statistics_num_frames{ 0 };
+
+		bool is_paused{ false };
 	};
 }
 
