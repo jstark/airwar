@@ -33,3 +33,15 @@ void Aircraft::draw_current(sf::RenderTarget &target, sf::RenderStates states) c
 {
 	target.draw(sprite_, states);
 }
+
+unsigned int Aircraft::get_category() const
+{
+	if (type_ == AircraftType::Eagle)
+	{
+		return static_cast<unsigned int>(Category::PlayerAircraft);
+	}
+	else
+	{
+		return static_cast<unsigned int>(Category::EnemyAircraft);
+	}
+}

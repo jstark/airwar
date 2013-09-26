@@ -20,6 +20,8 @@ namespace airwar
 
 		// sf::Drawable interface
 		void draw_current(sf::RenderTarget &target, sf::RenderStates states) const;
+
+		unsigned int get_category() const override;
 	private:
 		AircraftType type_;
 		sf::Sprite sprite_;
