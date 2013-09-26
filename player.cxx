@@ -18,12 +18,12 @@ using airwar::Aircraft;
 namespace
 {
 	template<typename GameObject, typename Function>
-	std::function < void(SceneNode&, sf::Time > derived_action(Function fn)
+	std::function < void(SceneNode&, sf::Time) > derived_action(Function fn)
 	{
 		return [=](SceneNode& node, sf::Time dt)
 		{
 			fn(static_cast<GameObject&>(node), dt);
-		}
+		};
 	}
 
 	struct MoveAircraft
