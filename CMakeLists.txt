@@ -27,6 +27,10 @@ set(HEADERS
 	resource_holder.hxx
 	texture_holder.hxx
 	world.hxx
+	command.hxx
+	command_queue.hxx
+	category.hxx
+	player.hxx
 	game.hxx)
 set(SOURCES
 	entity.cxx
@@ -34,6 +38,8 @@ set(SOURCES
 	scene.cxx
 	world.cxx
 	game.cxx
+	command_queue.cxx
+	player.cxx
 	airwar.cpp)
 
 if (${CMAKE_SYSTEM_NAME} MATCHES Windows)
