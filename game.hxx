@@ -2,6 +2,8 @@
 #define AIRWAR_GAME_HXX_INCLUDED
 
 #include "world.hxx"
+#include "player.hxx"
+
 #include "SFML/System.hpp"
 #include "SFML/Window.hpp"
 #include "SFML/Graphics.hpp"
@@ -21,6 +23,7 @@ namespace airwar
 
 		sf::RenderWindow window;
 		World world;
+		Player player;
 
 		sf::Font font;
 		sf::Text statistics_text;

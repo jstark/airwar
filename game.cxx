@@ -37,25 +37,15 @@ void Game::run()
 
 void Game::process_events()
 {
+	CommandQueue& commands = world.get_command_queue();
+
 	sf::Event event;
 	while (window.pollEvent(event))
 	{
-		switch (event.type)
+		player.handle_event(event, commands);
+		if (event.type == sf::Event::Closed)
 		{
-		case sf::Event::KeyPressed:
-			break;
-		case sf::Event::KeyReleased:
-			break;
-		case sf::Event::Closed:
 			window.close();
-			break;
-		case sf::Event::GainedFocus:
-			is_paused = false;
-			break;
-		case sf::Event::LostFocus:
-			is_paused = true;
-		default:
-			break;
 		}
 	}
 }
