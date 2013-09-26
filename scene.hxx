@@ -5,8 +5,12 @@
 #include <vector>
 #include "SFML/Graphics.hpp"
 
+#include "category.hxx"
+
 namespace airwar
 {
+	struct Command;
+
 	class SceneNode : public sf::Drawable, public sf::Transformable
 	{
 	public:
@@ -23,6 +27,10 @@ namespace airwar
 		sf::Transform get_world_transform() const;
 		sf::Vector2f get_world_position() const;
 
+		virtual unsigned int get_category() const;
+
+		void on_command(const Command& command, sf::Time dt);
+
 	private:
 		// drawable interface
 		void draw(sf::RenderTarget &target, sf::RenderStates states) const final;
@@ -34,7 +42,7 @@ namespace airwar
 		void update_children(sf::Time dt);
 
 		std::vector<Ptr> children_;
-		SceneNode *parent_ = nullptr;
+		SceneNode *parent_{ nullptr };
 	};
 
 	class SpriteNode : public SceneNode

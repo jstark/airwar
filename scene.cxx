@@ -1,10 +1,12 @@
 #include "scene.hxx"
+#include "command.hxx"
 #include <utility>
 #include <algorithm>
 #include <cassert>
 
 using airwar::SceneNode;
 using airwar::SpriteNode;
+using airwar::Command;
 
 void SceneNode::attach(SceneNode::Ptr node)
 {
@@ -87,4 +89,22 @@ SpriteNode::SpriteNode(const sf::Texture &texture, const sf::IntRect &rect)
 void SpriteNode::draw_current(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	target.draw(sprite_, states);
+}
+
+unsigned int SceneNode::get_category() const
+{
+	return static_cast<unsigned int>(Category::Scene);
+}
+
+void SceneNode::on_command(const Command& command, sf::Time dt)
+{
+	if (command.category & get_category())
+	{
+		command.action(*this, dt);
+	}
+
+	for (Ptr& node : children_)
+	{
+		node->on_command(command, dt);
+	}
 }
