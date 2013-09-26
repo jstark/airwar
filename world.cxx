@@ -2,6 +2,7 @@
 #include "aircraft.hxx"
 
 using airwar::World;
+using airwar::CommandQueue;
 
 static const float MAX_WORLD_Y = 2000.f;
 
@@ -57,6 +58,11 @@ void World::draw()
 {
 	window.setView(world_view);
 	window.draw(scene_graph);
+}
+
+CommandQueue& World::get_command_queue()
+{
+	return command_queue;
 }
 
 void World::update(sf::Time dt)

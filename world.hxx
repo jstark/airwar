@@ -3,6 +3,7 @@
 
 #include "SFML/Graphics.hpp"
 #include "texture_holder.hxx"
+#include "command_queue.hxx"
 #include "scene.hxx"
 #include <array>
 
@@ -25,6 +26,8 @@ namespace airwar
 		};
 
 		void draw();
+
+		CommandQueue& get_command_queue();
 
 	private:
 		void load_textures();
@@ -73,6 +76,11 @@ namespace airwar
 		 * A pointer to the player's aircraft
 		 */
 		Aircraft *player;
+
+		/*
+		 *
+		 */
+		CommandQueue command_queue;
 	};
 }
 
