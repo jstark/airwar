@@ -1,5 +1,6 @@
 #include "world.hxx"
 #include "aircraft.hxx"
+#include <cmath>
 
 using airwar::World;
 using airwar::CommandQueue;
