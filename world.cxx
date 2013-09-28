@@ -67,16 +67,38 @@ CommandQueue& World::get_command_queue()
 
 void World::update(sf::Time dt)
 {
+	// we set velocity to 0, so that the player falls behind
+	// as the view moves.
 	world_view.move(0.0f, scroll_speed * dt.asSeconds());
+	player->set_velocity(0.0f, 0.0f);
+
+	// if a player has pressed an arrow key, then an appropriate
+	// command will be inside command_queue, which when applied
+	// on the scene graph, will increase the player's speed
+	while (!command_queue.is_empty())
+	{
+		scene_graph.on_command(command_queue.pop(), dt);
+	}
+
+	// fix diagonal movement
+	sf::Vector2f velocity = player->velocity();
+	if (!velocity.x != 0.0f && velocity.y != 0.0f)
+	{
+		player->set_velocity(velocity / std::sqrt(2.0f));
+	}
+
+	// add scroll speed
+	player->accelerate(0.0f, scroll_speed);
+	scene_graph.update(dt);
+
+	// apply bounds
+	sf::FloatRect view_bounds(world_view.getCenter() - world_view.getSize() / 2.0f, world_view.getSize());
+	const float border_distance = 40.0f;
 
 	sf::Vector2f position = player->getPosition();
-	sf::Vector2f velocity = player->velocity();
-
-	if (position.x <= world_bounds.left + 150
-		|| position.x >= world_bounds.left + world_bounds.width - 150)
-	{
-		velocity.x = -velocity.x;
-		player->set_velocity(velocity);
-	}
-	scene_graph.update(dt);
+	position.x = std::max(position.x, view_bounds.left + border_distance);
+	position.x = std::min(position.x, view_bounds.left + view_bounds.width - border_distance);
+	position.y = std::max(position.y, view_bounds.top + border_distance);
+	position.y = std::max(position.y, view_bounds.top + view_bounds.height - border_distance);
+	player->setPosition(position);
 }
