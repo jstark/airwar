@@ -52,6 +52,16 @@ void World::build_scene()
 	player->setPosition(spawn_position);
 	player->set_velocity(40.0f, scroll_speed);
 	scene_layers[Air]->attach(std::move(leader));
+
+	// escort
+	std::unique_ptr<Aircraft> left(new Aircraft(AircraftType::Raptor, textures));
+	left->setPosition(-80.0f, 50.f);
+	player->attach(std::move(left));
+
+	std::unique_ptr<Aircraft> right(new Aircraft(AircraftType::Raptor, textures));
+	right->setPosition(+80.0f, 50.f);
+	player->attach(std::move(right));
+
 }
 
 void World::draw()
@@ -99,6 +109,6 @@ void World::update(sf::Time dt)
 	position.x = std::max(position.x, view_bounds.left + border_distance);
 	position.x = std::min(position.x, view_bounds.left + view_bounds.width - border_distance);
 	position.y = std::max(position.y, view_bounds.top + border_distance);
-	position.y = std::max(position.y, view_bounds.top + view_bounds.height - border_distance);
+	position.y = std::min(position.y, view_bounds.top + view_bounds.height - border_distance);
 	player->setPosition(position);
 }
