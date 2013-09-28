@@ -15,6 +15,8 @@ namespace airwar {
 	public:
 		void set_velocity(sf::Vector2f v);
 		void set_velocity(float vx, float vy);
+		void accelerate(sf::Vector2f velocity);
+		void accelerate(float vx, float vy);
 		sf::Vector2f velocity() const;
 	private:
 		void update_current(sf::Time dt) override;
