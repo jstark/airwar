@@ -48,6 +48,7 @@ void Game::process_events()
 			window.close();
 		}
 	}
+	player.handle_realtime_input(commands);
 }
 
 void Game::update(sf::Time elapsed_time)
